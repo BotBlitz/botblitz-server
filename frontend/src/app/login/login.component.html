@@ -1,0 +1,29 @@
+<div class="main">
+    <div class="center">
+        <div class="image-login">
+            <img class="image-login" src="assets/botblitz-logo-login.png">
+        </div>
+
+        <div class="form-login">
+            <form [formGroup]="formSignin">
+                <p *ngIf="description" style="color: red;">Usuário ou senha inválido</p>
+                <mat-form-field class="form-login">
+                    <mat-label class="form-login">Username</mat-label>
+                    <input matInput type="text" formControlName="username" />
+                    <mat-error *ngIf="isSubmitted" >Username is required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-login">
+                    <mat-label class="form-login">Password</mat-label>
+                    <input matInput type="password" formControlName="password" />
+                    <mat-error *ngIf="isSubmitted">Password is required</mat-error>
+                </mat-form-field>
+
+                <button class="form-login" mat-raised-button [class.spinner]="isLoading" [disabled]="isLoading"
+                    (click)="signin()">
+                    <h3>Sign in</h3>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

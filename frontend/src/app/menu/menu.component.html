@@ -1,0 +1,39 @@
+<div class="main">
+    <div class="menu">
+        <div *ngIf="!isAuthenticated" name="menuNoAuth">
+            <mat-toolbar>
+                <button mat-icon-button class="example-icon favorite-icon"
+                    aria-label="Example icon-button with heart icon">
+                    <mat-icon>home</mat-icon>
+                </button>
+                <a [routerLink]="['/home']" routerLinkActive="router-link-active">Home</a>
+                <span class="example-spacer"></span>
+                <a [routerLink]="['/login']" routerLinkActive="router-link-active">Sign in</a>
+                <button mat-icon-button class="example-icon favorite-icon"
+                    aria-label="Example icon-button with heart icon">
+                    <mat-icon>input</mat-icon>
+                </button>
+            </mat-toolbar>
+        </div>
+        <div *ngIf="isAuthenticated" name="menuAuth">
+            <mat-toolbar>
+                <button mat-icon-button class="example-icon favorite-icon"
+                    aria-label="Example icon-button with heart icon">
+                    <mat-icon>home</mat-icon>
+                </button>
+                <span class="example-spacer"></span>
+
+                <div style="display: inline; margin-right: 10px;" *ngFor="let item of menuList">
+                        <a style="display: inline;" [routerLink]="item.route">{{item.code}}</a>
+                </div>
+
+                <button mat-icon-button class="example-icon favorite-icon"
+                    aria-label="Example icon-button with heart icon"
+                    (click)="signout()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-toolbar>
+        </div>
+
+    </div>
+</div>
