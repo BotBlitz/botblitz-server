@@ -34,7 +34,7 @@ export class AuthService extends CommonService {
     }
 
     isAuthenticated(): boolean {        
-        return this.currentUserValue != null && this.currentUserValue.code != null
+        return this.currentUserValue != null && this.currentUserValue.idUser != null
     }
 
     login(auth:AuthRequest): Observable<any> {
@@ -44,7 +44,7 @@ export class AuthService extends CommonService {
                 map(result => {
                     let response = result as CommonResponse
                     if (response.code == 200) {
-                        let data = result.data as AuthResponse                        
+                        let data = result.data as AuthResponse   
                         sessionStorage.setItem(environment.tokenSession, JSON.stringify(data))
                         this.currentUserSubject.next(data)
                     }                

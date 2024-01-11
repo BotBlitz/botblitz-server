@@ -61,8 +61,10 @@ export class LoginComponent implements OnInit {
     
     this.authService.login(auth).subscribe({
       next: result => {
+        console.log(result)
         let response = result as CommonResponse
         if (response.code == 200) {
+          console.log('passou aki')
           this.router.navigate(['home'])
         }
         this.isLoading = false;

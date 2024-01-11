@@ -43,8 +43,8 @@ export class MenuComponent implements OnInit {
   buildMenuOptions(auth: AuthResponse): void {
     for (let routeItem of environment.routeList){
       if (routeItem.security){
-        if (auth.role){
-          let filteredItem = auth.role.filter(role => role.code == routeItem.code)
+        if (auth.roles){
+          let filteredItem = auth.roles.filter(role => role.code == routeItem.code)
           if (filteredItem) {
             this.menuList.push(routeItem)
           }
