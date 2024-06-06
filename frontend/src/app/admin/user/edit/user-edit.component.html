@@ -1,0 +1,21 @@
+<div class="mat-elevation-z1" style="padding: 10px;">
+
+    <div style="display: flex; ">
+        <p class="title">Edit user</p>
+    </div>
+    <div style="float: right; margin: 15px;">
+        <button mat-mini-fab matTooltip="Primary" class="primary" aria-label="">
+            <mat-icon>check</mat-icon>
+        </button>
+
+        <button mat-mini-fab matTooltip="secondary" style="background-color: darkred;" (click)="back()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</div><br>
+<div class="mat-elevation-z8" style="padding: 10px; width: 40%;">
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Ex. Mia" #input>
+    </mat-form-field>
+</div>

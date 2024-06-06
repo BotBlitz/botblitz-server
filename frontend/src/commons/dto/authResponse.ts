@@ -1,4 +1,3 @@
-import { CommonResponse } from "./commonResponse";
 import { Permission } from "./permissionDto";
 
 export class AuthResponse {

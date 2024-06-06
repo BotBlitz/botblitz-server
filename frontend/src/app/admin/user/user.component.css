@@ -1,0 +1,19 @@
+table {
+  width: 100%;
+}
+
+mat-form-field {
+  margin-top: 10px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}

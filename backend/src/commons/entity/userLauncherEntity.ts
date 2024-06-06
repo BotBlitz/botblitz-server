@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { IUser } from "../interface/IUser";
+import { IUserLauncher } from "../interface/IUserLauncher";
 import { IRepository } from "../interface/IRepository";
 import { randomUUID } from "crypto";
 
@@ -11,15 +11,6 @@ const userSchema = new mongoose.Schema({
     },
     
     name: {
-        type: String,
-        require: true,
-    },
-    username: {
-        type: String,
-        require: true,
-        unique: true
-    },
-    password: {
         type: String,
         require: true,
     },
@@ -51,7 +42,7 @@ const userSchema = new mongoose.Schema({
 
 }, { collection: 'users' })
 
-type UserType = IUser & mongoose.Document
+type UserType = IUserLauncher & mongoose.Document
 const UserModel = mongoose.model<UserType>('user', userSchema)
 
 class UserRepository implements IRepository{
@@ -72,7 +63,7 @@ class UserRepository implements IRepository{
         return await UserModel.findOne({username: username});
     }
 
-    public async save(user: IUser){    
+    public async save(user: IUserLauncher){    
         user.code = randomUUID()
         let entity = await UserModel.findOne({code:user.code}).select('-password').exec();
         if (!entity){

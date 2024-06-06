@@ -1,12 +1,15 @@
 <div class="main">
     <div class="center">
         <div class="image-login">
-            <img class="image-login" src="assets/botblitz-logo-login.png">
+            <img class="image-login" src="assets/botblitz-logo.png">
         </div>
 
         <div class="form-login">
             <form [formGroup]="formSignin">
-                <p *ngIf="description" style="color: red;">Usuário ou senha inválido</p>
+                <div class="message message-error" *ngIf="message">
+                    <p>{{message}}</p>
+                </div>
+                
                 <mat-form-field class="form-login">
                     <mat-label class="form-login">Username</mat-label>
                     <input matInput type="text" formControlName="username" />

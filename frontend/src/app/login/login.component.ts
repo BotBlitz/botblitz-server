@@ -1,8 +1,8 @@
-import { Component, OnInit, ɵDeferBlockConfig } from '@angular/core';
+import { Component, Input, OnInit,  } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/service/authService';
 import { CommonResponse } from '@commons/dto/commonResponse';
@@ -22,7 +22,9 @@ export class LoginComponent implements OnInit {
 
   isLoading: boolean
   isSubmitted: boolean
-  description?:string
+  
+  @Input({alias:"message"})
+  message!: string
 
   formSignin: FormGroup;
 
@@ -41,10 +43,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
-
-
 
   signin() {
     this.isSubmitted = true;
@@ -61,17 +60,15 @@ export class LoginComponent implements OnInit {
     
     this.authService.login(auth).subscribe({
       next: result => {
-        console.log(result)
         let response = result as CommonResponse
         if (response.code == 200) {
-          console.log('passou aki')
-          this.router.navigate(['home'])
+          this.router.navigate(['dashboard'])
         }
         this.isLoading = false;
       },
       error: err => {
         let response = err.error as CommonResponse
-        this.description = response.description
+        if (response.description) this.message = response.description
         this.isLoading = false;
       }
     })

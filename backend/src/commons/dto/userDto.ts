@@ -1,5 +1,5 @@
 import { IAutomation } from "../interface/IAutomation";
-import { IUser } from "../interface/IUser";
+import { IUser } from "../interface/IUserLauncher";
 
 export class User implements IUser {
     _id:string;

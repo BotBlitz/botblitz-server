@@ -13,9 +13,9 @@ export const httpRequestInterceptor: HttpInterceptorFn = (req, next) => {
 
     if (authService.currentUserValue.token) {
         const reqWithAuth = req.clone({
-            headers: req.headers.set('authorization', authService.currentUserValue.token)
+            headers: req.headers.set('authorization', "Bearer " + authService.currentUserValue.token)
         })
-        return next(reqWithAuth);
+        return next(reqWithAuth)
     }
 
     return next(req);

@@ -5,6 +5,6 @@ export class CommonResponse {
     name?: string;    
     message?: string;
     description?:string;
-    data?: string;
+    data?: any;
     isOperational?:boolean;
 }

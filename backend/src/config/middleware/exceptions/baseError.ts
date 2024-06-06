@@ -48,6 +48,6 @@ export class AuthorizationError extends BaseError {
 
 export class LoginError extends BaseError {
   constructor(name: string, message = 'Occured error during login', description: string) {
-    super(name, HttpStatusCode.FORBIDDEN, message, description, true);
+    super(name, HttpStatusCode.UNAUTHORIZED, message, description, true);
   }
 }

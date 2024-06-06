@@ -1,15 +1,13 @@
-import { IAutomation } from "./IAutomation";
+import { IUserRole } from "./IUserRole";
 
 export interface IUser {
-    _id:string;
-    code:string;
-    name:string;
-    username: string;
-    password: string;
-    launcherToken: string;
-    status: string;
-    expirationDate: Date;
-    automations: IAutomation[];
-    createdAt:Date;
-    updatedAt:Date;
+    idUser?:number;
+    name?:string;
+    username?:string;
+    password?:string;
+    status?:string;
+    isAdmin?:number;
+    roles?:IUserRole[];
+    createAt?:Date;
+    updateAt?:Date;
 }

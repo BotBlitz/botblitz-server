@@ -17,23 +17,36 @@
         </div>
         <div *ngIf="isAuthenticated" name="menuAuth">
             <mat-toolbar>
-                <button mat-icon-button class="example-icon favorite-icon"
-                    aria-label="Example icon-button with heart icon">
-                    <mat-icon>home</mat-icon>
-                </button>
-                <span class="example-spacer"></span>
-
-                <div style="display: inline; margin-right: 10px;" *ngFor="let item of menuList">
-                        <a style="display: inline;" [routerLink]="item.route">{{item.code}}</a>
-                </div>
-
-                <button mat-icon-button class="example-icon favorite-icon"
-                    aria-label="Example icon-button with heart icon"
-                    (click)="signout()">
-                    <mat-icon>close</mat-icon>
-                </button>
+                <mat-toolbar-row style="box-shadow: 0px 5px 5px gainsboro;">
+                    <img src="assets/botblitz-logo-removebg.png" style="width: 52px; display: inline;">
+                    <p style="display: inline; margin-left: 30px;">Bem vindo ao portal Botblitz {{name}}</p>
+                    <span class="example-spacer"></span>
+                    <mat-label>Signout</mat-label>
+                    <button mat-icon-button class="example-icon favorite-icon"
+                        aria-label="Example icon-button with heart icon" (click)="signout()">
+                        <mat-icon>exit_to_app</mat-icon>
+                    </button>
+                </mat-toolbar-row>
+                <mat-toolbar-row style="opacity: 80%; box-shadow: 0px 5px 5px gainsboro;">
+                    <button mat-button [routerLink]="['monitor']">
+                        Monitor
+                    </button>
+                    <button mat-button [routerLink]="['support']">
+                        Support
+                    </button>
+                    <button mat-button [routerLink]="['license']">
+                        License
+                    </button>
+                    <button mat-button [routerLink]="['automation']">
+                        Automation
+                    </button>
+                    <button mat-button [matMenuTriggerFor]="aboveMenu">Administration</button>
+                    <mat-menu #aboveMenu="matMenu" yPosition="above">
+                        <button mat-menu-item [routerLink]="['admin/user']">User</button>
+                        <button mat-menu-item [routerLink]="['admin/system']">System</button>
+                    </mat-menu>
+                </mat-toolbar-row>
             </mat-toolbar>
         </div>
-
     </div>
 </div>

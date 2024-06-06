@@ -3,7 +3,6 @@ import { UserService } from '../service/userService';
 import { errorHandler } from '../config/middleware/exceptions/errorHandler';
 import auth from '../config/middleware/auth/auth'
 
-
 export const userRoutes = Router();
 
 const userService = new UserService();
@@ -14,6 +13,20 @@ userRoutes.post('/user/signin', (req, res) => {
         .catch(err => { errorHandler.handleError(err, res) });
 })
 
+userRoutes.get('/user/find/:name', auth, (req, res) => {
+    userService.findUserbyName(req.params.name)
+        .then(result => res.status(result.code).send(result))
+        .catch(err => { errorHandler.handleError(err, res) });
+})
+
+userRoutes.get('/user/find', auth, (req, res) => {
+    userService.findAllUsers()
+        .then(result => res.status(result.code).send(result))
+        .catch(err => { errorHandler.handleError(err, res) });
+})
+
+
+/**
 userRoutes.post('/user/create', (req, res) => {
     userService.create(req.body)
         .then(result => res.status(result.code).send(result))
@@ -25,3 +38,4 @@ userRoutes.get('/user/role/findAll', auth ,(req, res) => {
         .then(result => res.status(result.code).send(result))
         .catch(err => { errorHandler.handleError(err, res) })
 })
+ */

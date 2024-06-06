@@ -4,6 +4,7 @@ import config from '../config/middleware/auth/authConfig'
 import { sign } from 'jsonwebtoken';
 import { environment } from '../resources/environments';
 import { IUser } from '../commons/interface/IUser';
+import { IUserLauncher } from '../commons/interface/IUserLauncher';
 import { LoginError, OperationError } from '../config/middleware/exceptions/baseError';
 import { messages } from '../resources/messages';
 import { HttpStatusCode } from '../helpers/httpStatusCode';
@@ -31,16 +32,16 @@ export class UserService {
             throw new LoginError(UserService.name, undefined, messages.get('userService.signin.username.not.found'))
         }
 
-       // if (!await bcrypt.compare(user.password, entity.password)) {
-       //     throw new LoginError(UserService.name, undefined, messages.get('userService.signin.incorrect.password'))
-       // }
+        // if (!await bcrypt.compare(user.password, entity.password)) {
+        //     throw new LoginError(UserService.name, undefined, messages.get('userService.signin.incorrect.password'))
+        // }
         let payload = {
             id: auth.idUser,
             name: auth.name,
             username: user.username
         }
-        
-        auth.roles = await userRespository.findUserRoles(auth.idUser)
+
+        auth.roles = await userRespository.findRoleByUser(auth.idUser)
         auth.token = sign(payload, config.privateKey, { expiresIn: "1h", algorithm: "RS256", issuer: "bot blitz" })
 
         let response = new Response()
@@ -50,8 +51,7 @@ export class UserService {
         return response;
     }
 
-
-    async create(user: IUser): Promise<Response> {
+    async createLauncherToken(user: IUserLauncher): Promise<Response> {
         try {
             const password = user.password
 
@@ -61,7 +61,6 @@ export class UserService {
             let ltBase64 = Buffer.from(JSON.stringify({ 'username': user.username, 'password': password })).toString('base64')
             user.launcherToken = Utils.encryptText(ltBase64)
 
-            //await userRespository.save(user)
             let response = new Response()
             response.code = HttpStatusCode.OK
             response.message = messages.get('userService.success')
@@ -72,10 +71,37 @@ export class UserService {
         }
     }
 
-    async roleFindAll(): Promise<Response> {
+    async findAllUsers(): Promise<Response> {
         let response = new Response()
-        let query = 'call devdb.pListRole()'
-        response.data = await Utils.executeQuery(query)
+        let users = await userRespository.findAllUsers();
+        response.data = users;
+        response.code = HttpStatusCode.OK;
+        response.message = messages.get('userService.success')
+        return response;    
+    }
+
+    async findUserbyName(name: string): Promise<Response> {
+        let response = new Response()
+        let users = await userRespository.findUserByName(name);
+        for (let user of users) {
+            if (user.idUser) {
+                user.roles = await userRespository.findRoleByUser(user.idUser);
+            }
+        }
+
+        response.data = users;
+        response.code = HttpStatusCode.OK;
+        response.message = messages.get('userService.success')
+        return response;
+    }
+
+    async findRoleByUser(user: IUser): Promise<Response> {
+        if (!user.idUser) {
+            throw new OperationError('', '', '')
+        }
+
+        let response = new Response()
+        response.data = await userRespository.findRoleByUser(user.idUser);
         response.code = HttpStatusCode.OK;
         response.message = messages.get('userService.success')
         return response;

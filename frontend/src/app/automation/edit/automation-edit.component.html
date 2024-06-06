@@ -1,0 +1,37 @@
+
+<div class="mat-elevation-z1" style="padding: 10px;">
+    <div style="display: flex; ">
+        <p class="title">Automation upload </p>
+    </div>
+    <div style="float: right; margin: 15px;">
+        <button mat-mini-fab matTooltip="Primary" class="primary" aria-label="" (click)="uploadFile()">
+            <mat-icon>check</mat-icon>
+        </button>
+
+        <button mat-mini-fab matTooltip="secondary" style="background-color: darkred;" (click)="back()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</div><br>
+<div class="mat-elevation-z8" style="padding: 10px">
+    <div [formGroup]="form">
+        <p><mat-form-field appearance="fill" style="width: 20%;">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name">
+            </mat-form-field></p>
+
+        <p><mat-form-field appearance="fill" style="width: 50%;">
+                <mat-label>Description</mat-label>
+                <input matInput formControlName="description">
+            </mat-form-field></p>
+
+        <p><mat-form-field appearance="fill" style="width: 50%;">
+                <mat-label>Files</mat-label>
+                <input matInput formControlName="file">
+                <button mat-icon-button matSuffix (click)="fileInput.click()">
+                    <mat-icon>folder</mat-icon>
+                </button>
+                <input type="file" #fileInput hidden (change)="onFileSelected($event)">
+            </mat-form-field></p>
+    </div>
+</div>

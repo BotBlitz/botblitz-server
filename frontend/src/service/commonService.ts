@@ -7,4 +7,11 @@ export class CommonService {
             'Accept': '*/*',
         })
     }
+
+    protected httpOptionsFormData = {
+        headers: new HttpHeaders({
+            'Content-Type': 'multipart/form-data;boundary=qwhehiurhefbqwfub',
+            'Accept': '*/*',
+        })
+    }
 }

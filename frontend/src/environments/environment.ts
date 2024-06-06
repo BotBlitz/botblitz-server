@@ -3,11 +3,12 @@ export const environment = {
     production:false,
     tokenSession: 'TOKEN_SESSION',
     url: 'http://localhost:3000',
+    urlCloud: 'http://localhost:3001',
     listPathNoAuth: ['/user/signin'],
     routeList: [
-        {code:'Home', route: 'home', security: false},
-        {code:'Dashboard', route: 'home', security: true},
-        {code:'Suport', route: 'suport', security: true},
+        {code:'Monitor', route: 'dashboard', security: true },
+        {code:'Automations', route: 'support', security: false},        
+        {code:'Support', route: 'support', security: true},        
         {code:'Administration', route: 'admin', security: true},
-    ]
+    ],
 }
