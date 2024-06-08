@@ -4,6 +4,7 @@ const { Sequelize, Transaction } = require('sequelize');
 const password = environment.get('mysql.password')
 const username = environment.get('mysql.username')
 const database = environment.get('mysql.database')
+const host = environment.get('mysql.host')
 const port = environment.get('mysql.port')
 const server = environment.get('mysql.server')
 

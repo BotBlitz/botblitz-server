@@ -6,6 +6,7 @@
   "scripts": {
     "start": "ts-node ./src/server.ts",
     "start:dev": "ts-node ./node_modules/nodemon/bin/nodemon.js env=development",
+    "start:hom": "ts-node ./node_modules/nodemon/bin/nodemon.js env=homologation",
     "start:prod": "npm run build && node ./dist/src/server.js",
     "build": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1"

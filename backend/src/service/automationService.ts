@@ -20,6 +20,5 @@ export class AutomationService {
         response.code = HttpStatusCode.OK;
         response.message = messages.get('userService.success')
         return response;    
-
     }
 }

@@ -2,8 +2,8 @@
 export const environment = {
     production:false,
     tokenSession: 'TOKEN_SESSION',
-    url: 'http://localhost:3000',
-    urlCloud: 'http://localhost:3001',
+    url: 'http://localhost:4050',
+    urlCloud: 'http://localhost:3050',
     listPathNoAuth: ['/user/signin'],
     routeList: [
         {code:'Monitor', route: 'dashboard', security: true },

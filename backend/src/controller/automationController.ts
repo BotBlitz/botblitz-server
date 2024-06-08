@@ -8,7 +8,7 @@ export const automationRoutes = Router();
 const automationService = new AutomationService();
 
 
-automationRoutes.get('/automation/find/:name', auth, (req, res) => {
+automationRoutes.get('/automation/find/:code', auth, (req, res) => {
     automationService.findAll()
         .then(result => res.status(result.code).send(result))
         .catch(err => { errorHandler.handleError(err, res) });
