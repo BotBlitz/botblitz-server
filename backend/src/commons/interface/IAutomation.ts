@@ -1,5 +1,4 @@
 
-
 export interface IAutomation {
     _id: String;
     code: String;

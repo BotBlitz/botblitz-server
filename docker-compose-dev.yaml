@@ -21,10 +21,23 @@ services:
   botblitz:
     image: botblitz-backend:latest
     container_name: botblitz-backend
+    restart: always    
     depends_on:
       - dbmysql
     ports: 
       - '4050:4050'
+
+  botblitz-frontend:
+    image: botblitz-frontend:latest
+    container_name: botblitz-frontend
+    depends_on:
+      - botblitz
+    restart: always    
+    environment:
+      AMBIENTE: 'dev'
+      PORT: '4000'
+    ports: 
+      - '4000:4000'
 
 # Names our volume
 volumes:
