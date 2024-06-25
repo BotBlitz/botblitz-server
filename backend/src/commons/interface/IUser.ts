@@ -1,7 +1,7 @@
 import { IUserRole } from "./IUserRole";
 
 export interface IUser {
-    idUser?:number;
+    id?:number;
     name?:string;
     username?:string;
     password?:string;

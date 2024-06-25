@@ -25,10 +25,10 @@ export class UserService {
             throw new LoginError(UserService.name, undefined, messages.get('userService.signin.password.required'))
         }
 
+
         let entity = await userRespository.findByUsername(user.username) as Auth[]
         let auth = entity[0]
-
-        if (!auth || !auth.idUser) {
+        if (!auth || !auth._id) {
             throw new LoginError(UserService.name, undefined, messages.get('userService.signin.username.not.found'))
         }
 
@@ -36,12 +36,12 @@ export class UserService {
         //     throw new LoginError(UserService.name, undefined, messages.get('userService.signin.incorrect.password'))
         // }
         let payload = {
-            id: auth.idUser,
+            id: auth._id,
             name: auth.name,
             username: user.username
         }
 
-        auth.roles = await userRespository.findRoleByUser(auth.idUser)
+        auth.roles = await userRespository.findRoleByUser(auth._id)
         auth.token = sign(payload, config.privateKey, { expiresIn: "1h", algorithm: "RS256", issuer: "bot blitz" })
 
         let response = new Response()
@@ -84,8 +84,8 @@ export class UserService {
         let response = new Response()
         let users = await userRespository.findUserByName(name);
         for (let user of users) {
-            if (user.idUser) {
-                user.roles = await userRespository.findRoleByUser(user.idUser);
+            if (user.id) {
+                user.roles = await userRespository.findRoleByUser(user.id);
             }
         }
 
@@ -96,12 +96,12 @@ export class UserService {
     }
 
     async findRoleByUser(user: IUser): Promise<Response> {
-        if (!user.idUser) {
+        if (!user.id) {
             throw new OperationError('', '', '')
         }
 
         let response = new Response()
-        response.data = await userRespository.findRoleByUser(user.idUser);
+        response.data = await userRespository.findRoleByUser(user.id);
         response.code = HttpStatusCode.OK;
         response.message = messages.get('userService.success')
         return response;
